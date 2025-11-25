@@ -3,7 +3,7 @@ from collections import defaultdict
 from datetime import date
 from typing import Dict, List, Optional
 
-from caravan_project.models.reservation import Reservation
+from src.models.reservation import Reservation
 from .base_repository import BaseRepository
 
 class ReservationRepository(BaseRepository[Reservation]):
@@ -25,6 +25,11 @@ class ReservationRepository(BaseRepository[Reservation]):
     def find_by_caravan_id(self, caravan_id: int) -> List[Reservation]:
         """특정 카라반의 모든 예약을 조회합니다."""
         return self._reservations_by_caravan.get(caravan_id, [])
+
+    def find_by_user_id(self, user_id: int) -> List[Reservation]:
+        """특정 사용자의 모든 예약을 조회합니다."""
+        # This is inefficient for a real database, but fine for an in-memory repo.
+        return [res for res in self._data.values() if res.user_id == user_id]
 
     def check_caravan_availability(self, caravan_id: int, start_date: date, end_date: date) -> bool:
         """

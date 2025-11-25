@@ -1,6 +1,6 @@
 
 from datetime import date
-from caravan_project.models.reservation import Reservation
+from src.models.reservation import Reservation
 
 class ReservationFactory:
     """예약 객체 생성을 담당하는 팩토리"""

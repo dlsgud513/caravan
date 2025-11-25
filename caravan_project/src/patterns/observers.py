@@ -1,7 +1,7 @@
 
 from abc import ABC, abstractmethod
 from typing import List
-from caravan_project.services.notification_service import NotificationService
+from src.services.notification_service import NotificationService
 
 class Observer(ABC):
     """옵저버 인터페이스"""

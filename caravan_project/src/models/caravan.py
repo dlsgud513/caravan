@@ -1,20 +1,29 @@
+from pydantic import BaseModel, Field
+from typing import Optional, List
 
-from dataclasses import dataclass, field
-from typing import List
-
-@dataclass
-class Caravan:
-    """카라반 정보를 관리하는 데이터 클래스"""
-    caravan_id: int
+class CaravanCreate(BaseModel):
+    """Model for creating a new caravan. Fields provided by the user."""
     name: str
-    owner_id: int
     type: str  # e.g., 'Motorhome', 'Campervan'
+    price_per_day: float = Field(..., gt=0, description="Price must be positive")
+    location: str
+    sleeps: int = Field(..., gt=0)
+    description: str
+    image_url: Optional[str] = None
+
+class Caravan(CaravanCreate):
+    """Full Caravan model including server-set fields."""
+    caravan_id: Optional[int] = None
+    owner_id: int
     is_available: bool = True
     average_rating: float = 0.0
     review_count: int = 0
 
+    class Config:
+        from_attributes = True
+
     def update_rating(self, new_rating: int):
-        """새로운 리뷰가 추가될 때 평균 별점과 리뷰 수를 업데이트합니다."""
+        """Updates the average rating and review count when a new review is added."""
         total_rating = self.average_rating * self.review_count
         self.review_count += 1
         self.average_rating = (total_rating + new_rating) / self.review_count

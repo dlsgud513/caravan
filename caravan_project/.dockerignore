@@ -1,0 +1,17 @@
+# Git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtualenv
+.venv/
+venv/
+env/
+
+# Local files
+.env
+backend.log

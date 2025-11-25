@@ -1,11 +1,11 @@
 
 from datetime import date
 
-from caravan_project.repositories.base_repository import BaseRepository
-from caravan_project.repositories.reservation_repository import ReservationRepository
-from caravan_project.models.user import User
-from caravan_project.models.caravan import Caravan
-from caravan_project.exceptions.custom_exceptions import (
+from src.repositories.base_repository import BaseRepository
+from src.repositories.reservation_repository import ReservationRepository
+from src.models.user import User
+from src.models.caravan import Caravan
+from src.exceptions.custom_exceptions import (
     UserNotFoundException,
     CaravanNotFoundException,
     CaravanNotAvailableException,
